@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- (1)宣言 -->
+<head>
+	<meta charset="UTF-8" />
+	<title>顧客一覧</title>
+</head>
+<body>
+	<table>
+		<tr th:each="customer : ${customers}"> <!-- (2)ループができる -->
+			<td th:text="${customer.id}">100</td> <!-- (3) th:textでタグの中の文字列を置換-->
+			<td th:text="${customer.lastName">山田</td>
+			<td th:text="${customer.firstName">太郎</td>
+			<td>
+				<form th:action="@{/customers/edit}" method="get"> <!-- (4)action属性を設定。相対パスを絶対パスに変換 -->
+					<input type="submit" name="form" value="編集" />
+					<input type="hidden" name="id" th:value="${customer.id}" /> <!-- (5)value属性を設定 -->
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/customers/delete}" method="post">
+					<input type="submit" name="form" value="削除" />
+					<input type="hidden" name="id" th:value="${customer.id}" />				
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
